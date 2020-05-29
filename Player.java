@@ -1,5 +1,3 @@
-package BlackJack.BlackJackApp;
-
 //implementation of blackjack player
 public class Player {
     // the player's name

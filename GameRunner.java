@@ -1,5 +1,3 @@
-package BlackJack.BlackJackApp;
-
 import java.util.Scanner;
 
 public class GameRunner {

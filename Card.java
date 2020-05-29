@@ -1,5 +1,3 @@
-package BlackJack.BlackJackApp;
-
 public class Card {
 
     private Suit mySuit;
