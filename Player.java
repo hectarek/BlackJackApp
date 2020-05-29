@@ -65,7 +65,6 @@ public class Player {
                 handSum += cardNum;
             }
         }
-<<<<<<< HEAD
         // If we have aces and our sum is > 21, set some/all of them to value 1 insteady
         while (handSum > 21 && numAces > 0) {// if hand sum is greater than 21 and number of aces is greater than 0,
                                              // we will subtract 10 from handsum or decrement the Aces
@@ -73,15 +72,6 @@ public class Player {
             numAces--;
         }
         return handSum;
-=======
-            // If we have aces and our sum is > 21, set some/all of them to value 1 insteady
-            while (handSum > 21 && numAces > 0) {// if hand sum is greater than 21 and number of aces is greater than 0,
-                                                 // we will subtract 10 from handsum or decrement the Aces
-                handSum -= 10;
-                numAces--;
-            }
-            return handSum;
->>>>>>> 3e17b7b97880d4e5cf0d1ac1dd629dc799d396f0
     }
 
     // print out cards in player's hand
@@ -89,7 +79,7 @@ public class Player {
     // first hand; useful when we may not want to see the cards of the dealer
     public void printHand(boolean showFirstCard) {
         System.out.printf("%s's cards: \n", this.name);
-        for (int c = 0; c < 10; c++) {
+        for (int c = 0; c < this.numCards; c++) {
             if (c == 0 && !showFirstCard) {// if we are on the first card and don't want to print it
                 System.out.println(" [hidden]");
             } else {
