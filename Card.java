@@ -1,50 +1,80 @@
 public class Card {
-    public enum Value {
-        ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING;
+    
+    private Suit mySuit;
+    private int myNumber;
+
+    public Card(Suit aSuit, int aNumber) {
+        this.mySuit = aSuit;
+        this.myNumber = aNumber;
+    }
+
+
+    public Suit getMySuit() {
+        return mySuit;
+    }
+    public void setMySuit(Suit mySuit) {
+        this.mySuit = mySuit;
+    }
+
+    public int getMyNumber() {
+        return this.myNumber;
+    }
+    public void setMyNumber(int myNumber) {
+        this.myNumber = myNumber;
+    }
+
+    @Override 
+    public String toString(){
+        String numStr = "";
+
+        switch(this.myNumber) {
+            case 1 :
+                numStr="Ace";
+                break;
+            case 2 :
+                numStr="Two";
+                break;
+            case 3 :
+                numStr="Three";
+                break;
+            case 4 :
+                numStr="Four";
+                break;
+            case 5 :
+                numStr="Five";
+                break;
+            case 6 :
+                numStr="Six";
+                break;
+            case 7 :
+                numStr="Seven";
+                break;
+            case 8 :
+                numStr="Eight";
+                break;
+            case 9 :
+                numStr="Nine";
+                break;
+            case 10 :
+                numStr="Ten";
+                break;
+            case 11 :
+                numStr="Jack";
+                break;
+            case 12 :
+                numStr="Queen";
+                break;
+            case 13 :
+                numStr="King";
+                break;
+            default : 
+                break;
+        }
+
+        return numStr + mySuit.toString();
+    }
+
     
 
-        public static Value getValues(int index) {
-            Value[] values = Value.values();
-            return values[index];
-        }
-
-        public static int getValueLength() {
-            return Value.values().length;
-        }
-    }
-
-    public enum Suit {
-        HEART, DIAMOND, CLUB, SPADE;
-
-        public static Suit getSuitLength(int index) {
-            Suit[] suits = Suit.values();
-            return suits[index];
-        }
-
-        public static int getSuitLength() {
-            return Suit.values().length;
-        }
-    }
-
-
-    private Suit suit;
-    private Value value;
-
-    public Card(Suit suit, Value value) {
-        this.suit = suit;
-        this.value = value;
-    }
-
-    public Suit getSuit() {
-        return this.suit;
-    }
-
-    public Value getValue() {
-        return this.value;
-    }
-
-    public String toString() {
-        return this.suit + " " + this.value;
-    }
 
 }
