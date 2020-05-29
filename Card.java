@@ -35,6 +35,16 @@ public class Card {
         this.value = value;
     }
 
-    
+    public Suit getSuit() {
+        return this.suit;
+    }
+
+    public Value getValue() {
+        return this.value;
+    }
+
+    public String toString() {
+        return this.suit + " " + this.value;
+    }
 
 }
