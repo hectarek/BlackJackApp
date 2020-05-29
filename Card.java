@@ -1,5 +1,7 @@
+package BlackJack.BlackJackApp;
+
 public class Card {
-    
+
     private Suit mySuit;
     private int myNumber;
 
@@ -8,10 +10,10 @@ public class Card {
         this.myNumber = aNumber;
     }
 
-
     public Suit getMySuit() {
         return mySuit;
     }
+
     public void setMySuit(Suit mySuit) {
         this.mySuit = mySuit;
     }
@@ -19,62 +21,60 @@ public class Card {
     public int getMyNumber() {
         return this.myNumber;
     }
+
     public void setMyNumber(int myNumber) {
         this.myNumber = myNumber;
     }
 
-    @Override 
-    public String toString(){
+    @Override
+    public String toString() {
         String numStr = "";
 
-        switch(this.myNumber) {
-            case 1 :
-                numStr="Ace";
+        switch (this.myNumber) {
+            case 1:
+                numStr = "Ace";
                 break;
-            case 2 :
-                numStr="Two";
+            case 2:
+                numStr = "Two";
                 break;
-            case 3 :
-                numStr="Three";
+            case 3:
+                numStr = "Three";
                 break;
-            case 4 :
-                numStr="Four";
+            case 4:
+                numStr = "Four";
                 break;
-            case 5 :
-                numStr="Five";
+            case 5:
+                numStr = "Five";
                 break;
-            case 6 :
-                numStr="Six";
+            case 6:
+                numStr = "Six";
                 break;
-            case 7 :
-                numStr="Seven";
+            case 7:
+                numStr = "Seven";
                 break;
-            case 8 :
-                numStr="Eight";
+            case 8:
+                numStr = "Eight";
                 break;
-            case 9 :
-                numStr="Nine";
+            case 9:
+                numStr = "Nine";
                 break;
-            case 10 :
-                numStr="Ten";
+            case 10:
+                numStr = "Ten";
                 break;
-            case 11 :
-                numStr="Jack";
+            case 11:
+                numStr = "Jack";
                 break;
-            case 12 :
-                numStr="Queen";
+            case 12:
+                numStr = "Queen";
                 break;
-            case 13 :
-                numStr="King";
+            case 13:
+                numStr = "King";
                 break;
-            default : 
+            default:
                 break;
         }
 
         return numStr + mySuit.toString();
     }
-
-    
-
 
 }

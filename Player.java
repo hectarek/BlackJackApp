@@ -1,3 +1,5 @@
+package BlackJack.BlackJackApp;
+
 //implementation of blackjack player
 public class Player {
     // the player's name
@@ -50,9 +52,9 @@ public class Player {
         int cardNum;
         int numAces = 0;
         // calc each card's contribution to the hand sum
-        for (int c = 0; c < 10; c++) {
+        for (int c = 0; c < this.numCards; c++) {
             // get the number of cards
-            cardNum = this.hand[c].getNumber();
+            cardNum = this.hand[c].getMyNumber();
 
             if (cardNum == 1) {// 1=Ace
                 numAces++;
@@ -62,15 +64,14 @@ public class Player {
             } else {
                 handSum += cardNum;
             }
-
-            // If we have aces and our sum is > 21, set some/all of them to value 1 insteady
-            while (handSum > 21 && numAces > 0) {// if hand sum is greater than 21 and number of aces is greater than 0,
-                                                 // we will subtract 10 from handsum or decrement the Aces
-                handSum -= 10;
-                numAces--;
-            }
-            return handSum;
         }
+        // If we have aces and our sum is > 21, set some/all of them to value 1 insteady
+        while (handSum > 21 && numAces > 0) {// if hand sum is greater than 21 and number of aces is greater than 0,
+                                             // we will subtract 10 from handsum or decrement the Aces
+            handSum -= 10;
+            numAces--;
+        }
+        return handSum;
     }
 
     // print out cards in player's hand
