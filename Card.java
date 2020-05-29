@@ -17,7 +17,7 @@ public class Card {
     }
 
     public int getMyNumber() {
-        return this.myNumber;
+        return myNumber;
     }
     public void setMyNumber(int myNumber) {
         this.myNumber = myNumber;
