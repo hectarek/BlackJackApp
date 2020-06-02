@@ -5,8 +5,17 @@ public class GameRunner {
         Scanner sc = new Scanner(System.in);
         Deck theDeck = new Deck(1, true);
 
-        Player me = new Player("Cherish");
+        System.out.println("What is your name?");
+        String playerName = sc.nextLine();
+        Player me = new Player(playerName);
+        
         Player dealer = new Player("Dealer");
+        
+        me.askPlayersBet();
+
+
+
+
 
         me.addCard(theDeck.dealNextCard());
         dealer.addCard(theDeck.dealNextCard());
@@ -24,7 +33,7 @@ public class GameRunner {
 
         while (!meDone || !dealerDone) {
             if (!meDone) {
-                System.out.println("Hit or Stay? (Enter H or S: ");
+                System.out.println("Hit or Stay? (Enter H or S)");
                 ans = sc.next();
                 System.out.println();
 
@@ -55,10 +64,17 @@ public class GameRunner {
         int mySum = me.getHandSum();
         int dealerSum = dealer.getHandSum();
 
+        double betAmount = me.getPlayersBet();
+
         if (mySum > dealerSum && mySum <= 21 || dealerSum > 21) {
             System.out.println("You Win!");
+           
+            me.playerWins(betAmount);
+            System.out.println(betAmount);
         } else {
             System.out.println("Dealer wins!");
+            me.playerLoses(betAmount);
+            System.out.println(betAmount);
         }
     }
 }

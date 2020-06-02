@@ -40,7 +40,7 @@ public class Player {
         return this.initalAmount;
     }
 
-    public double getPlayersBet() {
+    public double askPlayersBet() {
         System.out.println("Your current amount is " + this.initalAmount);
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter a bet amount in increments of 5. (Ex. 5, 10, 15, etc.)");
@@ -59,8 +59,15 @@ public class Player {
                 System.out.println("Sorry, you do not have enough funds, try a smaller amount.");
             }
         } while (1 != 0);
-        sc.close();
+        
+        this.playersBet = amount;
+
         return amount; 
+    }
+
+
+    public double getPlayersBet() {
+        return this.playersBet;
     }
 
     // Add a card to the player's hand.
@@ -120,5 +127,15 @@ public class Player {
                 System.out.printf(" %s\n", this.hand[c].toString());
             }
         }
+    }
+
+    public void playerLoses(double bet) {
+        bet = this.playersBet;
+        this.initalAmount -= bet;
+    }
+
+    public void playerWins(double bet) {
+        bet = this.playersBet;
+        this.initalAmount += bet;
     }
 }
