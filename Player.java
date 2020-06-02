@@ -1,3 +1,5 @@
+package BlackJackApp;
+
 //implementation of blackjack player
 public class Player {
     // the player's name
@@ -45,14 +47,14 @@ public class Player {
 
     // Get sume of the cards in the player's hand
     // return the sum
-    public int getHandSum() {
+    public void getHandSum() {
         int handSum = 0;
         int cardNum;
         int numAces = 0;
         // calc each card's contribution to the hand sum
         for (int c = 0; c < 10; c++) {
             // get the number of cards
-            cardNum = this.hand[c].getNumber();
+            cardNum = this.hand[c].getMyNumber();
 
             if (cardNum == 1) {// 1=Ace
                 numAces++;
@@ -69,7 +71,7 @@ public class Player {
                 handSum -= 10;
                 numAces--;
             }
-            return handSum;
+            return;
         }
     }
 

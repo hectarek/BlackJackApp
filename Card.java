@@ -1,3 +1,5 @@
+package BlackJackApp;
+
 public class Card {
     
     private Suit mySuit;
