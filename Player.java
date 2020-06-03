@@ -5,12 +5,12 @@ public class Player {
     // the player's name
     private String name;
 
-   // The player's Inital betting amount
-   private double initalAmount = 200.00; 
+    // The player's Inital betting amount
+    private double initalAmount = 200.00;
 
-   // The player's amount they bet
-   private double playersBet;
-   
+    // The player's amount they bet
+    private double playersBet;
+
     // the cards in the players hand
     private Card[] hand = new Card[10];// we assume that you will never get more than 10 cards
 
@@ -35,8 +35,8 @@ public class Player {
 
     }
 
-    //Get players bet amount
-    public double getInitalBet() {
+    // Get players bet amount
+    public double getInitalAmount() {
         return this.initalAmount;
     }
 
@@ -47,8 +47,8 @@ public class Player {
         double amount;
         do {
             amount = sc.nextDouble();
-            if(amount <= this.initalAmount) {
-                if(amount % 5 != 0) {
+            if (amount <= this.initalAmount) {
+                if (amount % 5 != 0) {
                     System.out.println("Error, please enter an increment of 5");
                 } else {
                     this.initalAmount -= amount;
@@ -59,12 +59,11 @@ public class Player {
                 System.out.println("Sorry, you do not have enough funds, try a smaller amount.");
             }
         } while (1 != 0);
-        
+
         this.playersBet = amount;
 
-        return amount; 
+        return amount;
     }
-
 
     public double getPlayersBet() {
         return this.playersBet;
