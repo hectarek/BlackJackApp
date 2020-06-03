@@ -21,6 +21,7 @@ public class GameRunner {
             System.out.println("Cards are dealt!\n");
             me.printHand(true);
             dealer.printHand(false);
+            System.out.println("\nYour card sum is: " + me.getHandSum());
             System.out.println("\n");
 
             boolean meDone = false;
@@ -52,7 +53,6 @@ public class GameRunner {
                 }
                 System.out.println();
             }
-            sc.close();
 
             me.printHand(true);
             dealer.printHand(true);
@@ -69,11 +69,15 @@ public class GameRunner {
                 System.out.println("Your current pot is $" + me.getInitalAmount());
             } else {
                 System.out.println("Dealer wins!");
-                me.playerLoses(betAmount);
                 System.out.println("You lost $" + betAmount);
                 System.out.println("Your current pot is $" + me.getInitalAmount());
             }
-            System.out.println("Thank you for playing!");
+            me.emptyHand();
+            dealer.emptyHand();
+
+            System.out.println("--------------");
+            System.out.println(":Next Round:");
         }
+        System.out.println("Thank you for playing!");
     }
 }

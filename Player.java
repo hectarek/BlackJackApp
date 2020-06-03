@@ -128,13 +128,8 @@ public class Player {
         }
     }
 
-    public void playerLoses(double bet) {
-        bet = this.playersBet;
-        this.initalAmount -= bet;
-    }
-
     public void playerWins(double bet) {
         bet = this.playersBet;
-        this.initalAmount += bet;
+        this.initalAmount += (bet * 2);
     }
 }
