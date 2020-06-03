@@ -13,10 +13,6 @@ public class GameRunner {
         
         me.askPlayersBet();
 
-
-
-
-
         me.addCard(theDeck.dealNextCard());
         dealer.addCard(theDeck.dealNextCard());
         me.addCard(theDeck.dealNextCard());

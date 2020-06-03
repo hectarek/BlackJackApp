@@ -30,43 +30,43 @@ public class Card {
 
         switch (this.myNumber) {
             case 1:
-                numStr = "Ace";
+                numStr = "Ace(A) ";
                 break;
             case 2:
-                numStr = "Two";
+                numStr = "Two(2) ";
                 break;
             case 3:
-                numStr = "Three";
+                numStr = "Three(3) ";
                 break;
             case 4:
-                numStr = "Four";
+                numStr = "Four(4) ";
                 break;
             case 5:
-                numStr = "Five";
+                numStr = "Five(5) ";
                 break;
             case 6:
-                numStr = "Six";
+                numStr = "Six(6) ";
                 break;
             case 7:
-                numStr = "Seven";
+                numStr = "Seven(7) ";
                 break;
             case 8:
-                numStr = "Eight";
+                numStr = "Eight(8) ";
                 break;
             case 9:
-                numStr = "Nine";
+                numStr = "Nine(9) ";
                 break;
             case 10:
-                numStr = "Ten";
+                numStr = "Ten(10) ";
                 break;
             case 11:
-                numStr = "Jack";
+                numStr = "Jack(J) ";
                 break;
             case 12:
-                numStr = "Queen";
+                numStr = "Queen(Q) ";
                 break;
             case 13:
-                numStr = "King";
+                numStr = "King(K) ";
                 break;
             default:
                 break;
