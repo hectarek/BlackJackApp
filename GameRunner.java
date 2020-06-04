@@ -1,6 +1,17 @@
 import java.util.Scanner;
 
 public class GameRunner {
+
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+
+
+
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -12,7 +23,7 @@ public class GameRunner {
         Player dealer = new Player("Dealer");
 
         boolean playGame = false;
-        System.out.println("Do you want to play a game of BlackJack? (y/n)");
+        System.out.println(ANSI_YELLOW + "Do you want to play a game of BlackJack? (y/n)" + ANSI_RESET);
         String answer = sc.nextLine();
 
         if (answer.equalsIgnoreCase("y")) {
@@ -27,7 +38,7 @@ public class GameRunner {
             me.addCard(theDeck.dealNextCard());
             dealer.addCard(theDeck.dealNextCard());
 
-            System.out.println("Cards are dealt!\n");
+            System.out.println(ANSI_YELLOW + "Cards are dealt!\n" + ANSI_RESET);
             me.printHand(true);
             System.out.println("");
             dealer.printHand(false);
@@ -40,7 +51,7 @@ public class GameRunner {
 
             while (!meDone || !dealerDone) {
                 if (!meDone) {
-                    System.out.println("Hit or Stay? (Enter H or S)");
+                    System.out.println(ANSI_CYAN + "Hit or Stay? (Enter H or S)" + ANSI_RESET);
                     ans = sc.next();
                     System.out.println();
 
@@ -54,11 +65,11 @@ public class GameRunner {
                 }
                 if (!dealerDone) {
                     if (dealer.getHandSum() < 17) {
-                        System.out.println("The Dealer hits\n");
+                        System.out.println(ANSI_CYAN + "The Dealer hits\n" + ANSI_RESET);
                         dealerDone = !dealer.addCard(theDeck.dealNextCard());
                         dealer.printHand(false);
                     } else {
-                        System.out.println("The Dealer Stays\n");
+                        System.out.println(ANSI_CYAN + "The Dealer Stays\n"+ ANSI_RESET);
                         dealerDone = true;
                     }
                 }
@@ -80,13 +91,13 @@ public class GameRunner {
             double betAmount = me.getPlayersBet();
 
             if (mySum > dealerSum && mySum <= 21 || dealerSum > 21) {
-                System.out.println("You Win!");
+                System.out.println(ANSI_GREEN + "You Win!");
                 me.playerWins(betAmount);
-                System.out.println("You won $" + betAmount);
+                System.out.println("You won $" + betAmount + ANSI_RESET);
                 System.out.println("Your current pot is $" + me.getInitalAmount());
             } else {
-                System.out.println("Dealer wins!");
-                System.out.println("You lost $" + betAmount);
+                System.out.println(ANSI_RED + "Dealer wins!");
+                System.out.println("You lost $" + betAmount + ANSI_RESET);
                 System.out.println("Your current pot is $" + me.getInitalAmount());
             }
 
@@ -94,11 +105,11 @@ public class GameRunner {
             dealer.emptyHand();
 
             if (me.getInitalAmount() < 5){
-                System.out.println("\nLooks like your luck just ran out!\n");
+                System.out.println(ANSI_RED + "\nLooks like your luck just ran out!\n" + ANSI_RESET);
                 break;
             }
 
-            System.out.println("\nDo you want to play again? (y/n)");
+            System.out.println(ANSI_CYAN + "\nDo you want to play again? (y/n)" + ANSI_RESET);
             String askAgain = sc.next();
 
             if (askAgain.equalsIgnoreCase("y")) {
@@ -109,6 +120,6 @@ public class GameRunner {
             }
 
         }
-        System.out.println("Thank you for coming!");
+        System.out.println(ANSI_YELLOW + "Thank you for coming!" + ANSI_RESET);
     }
 }
