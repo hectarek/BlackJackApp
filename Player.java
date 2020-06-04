@@ -48,12 +48,12 @@ public class Player {
         do {
             amount = sc.nextDouble();
             if (amount <= this.initalAmount) {
-                if (amount % 5 != 0) {
-                    System.out.println("Error, please enter an increment of 5");
-                } else {
+                if (amount % 5 == 0 && amount >= 5) {
                     this.initalAmount -= amount;
                     System.out.println("Your bet amount is " + amount);
-                    break;
+                    break;                
+                } else {
+                    System.out.println("Error, please enter an increment of 5");
                 }
             } else {
                 System.out.println("Sorry, you do not have enough funds, try a smaller amount.");
