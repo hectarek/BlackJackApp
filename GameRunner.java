@@ -2,15 +2,24 @@ import java.util.Scanner;
 
 public class GameRunner {
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
         Deck theDeck = new Deck(1, true);
 
         System.out.println("What is your name?");
         String playerName = sc.nextLine();
         Player me = new Player(playerName);
-
         Player dealer = new Player("Dealer");
-        while (me.getInitalAmount() >= 5) {
+
+        boolean playGame = false;
+        System.out.println("Do you want to play a game of BlackJack? (y/n)");
+        String answer = sc.nextLine();
+
+        if (answer.equalsIgnoreCase("y")) {
+            playGame = true;
+        }
+
+        while ( playGame && me.getInitalAmount() >= 5) {
             me.askPlayersBet();
 
             me.addCard(theDeck.dealNextCard());
@@ -20,6 +29,7 @@ public class GameRunner {
 
             System.out.println("Cards are dealt!\n");
             me.printHand(true);
+            System.out.println("");
             dealer.printHand(false);
             System.out.println("\nYour card sum is: " + me.getHandSum());
             System.out.println("\n");
@@ -37,6 +47,7 @@ public class GameRunner {
                     if (ans.compareToIgnoreCase("H") == 0) {
                         meDone = !me.addCard(theDeck.dealNextCard());
                         me.printHand(true);
+                        System.out.println("");
                     } else {
                         meDone = true;
                     }
@@ -51,14 +62,20 @@ public class GameRunner {
                         dealerDone = true;
                     }
                 }
-                System.out.println();
+                System.out.println("\nYour card sum is: " + me.getHandSum());
+                System.out.println("");
             }
 
             me.printHand(true);
+            System.out.println("");
             dealer.printHand(true);
+            System.out.println("");
 
             int mySum = me.getHandSum();
             int dealerSum = dealer.getHandSum();
+            System.out.println("\nYour final sum is: " + me.getHandSum());
+            System.out.println("\nDealer's final sum is: " + dealer.getHandSum());
+            System.out.println("");
 
             double betAmount = me.getPlayersBet();
 
@@ -72,12 +89,26 @@ public class GameRunner {
                 System.out.println("You lost $" + betAmount);
                 System.out.println("Your current pot is $" + me.getInitalAmount());
             }
+
             me.emptyHand();
             dealer.emptyHand();
 
-            System.out.println("--------------");
-            System.out.println(":Next Round:");
+            if (me.getInitalAmount() < 5){
+                System.out.println("\nLooks like your luck just ran out!\n");
+                break;
+            }
+
+            System.out.println("\nDo you want to play again? (y/n)");
+            String askAgain = sc.next();
+
+            if (askAgain.equalsIgnoreCase("y")) {
+                System.out.println("--------------");
+                System.out.println(":Next Round:");
+            } else {
+                playGame = false;
+            }
+
         }
-        System.out.println("Thank you for playing!");
+        System.out.println("Thank you for coming!");
     }
 }
