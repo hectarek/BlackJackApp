@@ -128,6 +128,10 @@ public class Player {
         }
     }
 
+    public int printHand(int card) {
+        return this.hand[card].getMyNumber();
+    }
+
     public void playerWins(double bet) {
         bet = this.playersBet;
         this.initalAmount += (bet * 2);

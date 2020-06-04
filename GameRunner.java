@@ -30,13 +30,16 @@ public class GameRunner {
             playGame = true;
         }
 
-        while ( playGame && me.getInitalAmount() >= 5) {
+        while ( playGame && me.getInitalAmount() >= 5 ) {
             me.askPlayersBet();
 
             me.addCard(theDeck.dealNextCard());
             dealer.addCard(theDeck.dealNextCard());
             me.addCard(theDeck.dealNextCard());
             dealer.addCard(theDeck.dealNextCard());
+
+            int playersFirstCard = me.printHand(0);
+            int playersSecondCard = me.printHand(1);
 
             System.out.println(ANSI_YELLOW + "Cards are dealt!\n" + ANSI_RESET);
             me.printHand(true);
