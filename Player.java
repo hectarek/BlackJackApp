@@ -32,7 +32,10 @@ public class Player {
             this.hand[c] = null;
         }
         this.numCards = 0; // number of cards is now set to zero
+    }
 
+    public String getName(){
+        return this.name;
     }
 
     // Get players bet amount
@@ -130,6 +133,10 @@ public class Player {
 
     public int printHand(int card) {
         return this.hand[card].getMyNumber();
+    }
+
+    public Card printHandCard(int card) {
+        return this.hand[card];
     }
 
     public void playerWins(double bet) {

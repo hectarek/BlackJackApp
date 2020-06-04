@@ -52,6 +52,27 @@ public class GameRunner {
             boolean dealerDone = false;
             String ans;
 
+            if (playersFirstCard == playersSecondCard) {
+
+                System.out.println(ANSI_CYAN + "Would you like to split your cards? (y/n)" + ANSI_RESET);
+                String wantToSplit = sc.next();
+
+                if(wantToSplit.equalsIgnoreCase("y")) {
+                    boolean roundSplit = true;
+                    Player meSplit = new Player(me.getName()+ "'s Split");
+    
+                    // Change the value of the second card to act as another 
+                    // card being drawn for the first pair.
+                    Card playersSecondCardToSplit = me.printHandCard(1);
+                    playersSecondCardToSplit = theDeck.dealNextCard();
+                    
+                    // Draw another card for the second pair.
+                    meSplit.addCard(me.printHandCard(1));
+                    meSplit.addCard(theDeck.dealNextCard());
+                }
+
+            }
+
             while (!meDone || !dealerDone) {
                 if (!meDone) {
                     System.out.println(ANSI_CYAN + "Hit or Stay? (Enter H or S)" + ANSI_RESET);
