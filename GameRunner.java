@@ -21,6 +21,7 @@ public class GameRunner {
         String playerName = sc.nextLine();
         Player me = new Player(playerName);
         Player dealer = new Player("Dealer");
+        Player meSplit = new Player(me.getName()+ "'s Split");
 
         boolean playGame = false;
         System.out.println(ANSI_YELLOW + "Do you want to play a game of BlackJack? (y/n)" + ANSI_RESET);
@@ -50,6 +51,7 @@ public class GameRunner {
 
             boolean meDone = false;
             boolean dealerDone = false;
+            boolean roundSplit = false;
             String ans;
 
             if (playersFirstCard == playersSecondCard) {
@@ -58,22 +60,20 @@ public class GameRunner {
                 String wantToSplit = sc.next();
 
                 if(wantToSplit.equalsIgnoreCase("y")) {
-                    boolean roundSplit = true;
-                    Player meSplit = new Player(me.getName()+ "'s Split");
+                    roundSplit = true;
     
-                    // Change the value of the second card to act as another 
-                    // card being drawn for the first pair.
-                    Card playersSecondCardToSplit = me.printHandCard(1);
-                    playersSecondCardToSplit = theDeck.dealNextCard();
-                    
                     // Draw another card for the second pair.
                     meSplit.addCard(me.printHandCard(1));
                     meSplit.addCard(theDeck.dealNextCard());
+
+                    // Change the value of the second card to another 
+                    // card being drawn for the first pair.
+                    me.setHandCard(1, theDeck.dealNextCard());
                 }
 
             }
 
-            while (!meDone || !dealerDone) {
+            while (!meDone || !dealerDone || roundSplit) {
                 if (!meDone) {
                     System.out.println(ANSI_CYAN + "Hit or Stay? (Enter H or S)" + ANSI_RESET);
                     ans = sc.next();
@@ -87,6 +87,20 @@ public class GameRunner {
                         meDone = true;
                     }
                 }
+                if (roundSplit) {
+                    System.out.println(ANSI_CYAN + "Second Hand: Hit or Stay? (Enter H or S)" + ANSI_RESET);
+                    ans = sc.next();
+                    System.out.println();
+
+                    if (ans.compareToIgnoreCase("H") == 0) {
+                        roundSplit = meSplit.addCard(theDeck.dealNextCard());
+                        meSplit.printHand(true);
+                        System.out.println("");
+                    } else {
+                        roundSplit = false;
+                    }
+                }
+ 
                 if (!dealerDone) {
                     if (dealer.getHandSum() < 17) {
                         System.out.println(ANSI_CYAN + "The Dealer hits\n" + ANSI_RESET);
@@ -101,20 +115,61 @@ public class GameRunner {
                 System.out.println("");
             }
 
-            me.printHand(true);
-            System.out.println("");
-            dealer.printHand(true);
-            System.out.println("");
-
             int mySum = me.getHandSum();
+            int mySplitSum = meSplit.getHandSum();
             int dealerSum = dealer.getHandSum();
-            System.out.println("\nYour final sum is: " + me.getHandSum());
-            System.out.println("\nDealer's final sum is: " + dealer.getHandSum());
-            System.out.println("");
+
+            if (roundSplit) {
+                me.printHand(true);
+                System.out.println("");
+                meSplit.printHand(true);
+                System.out.println("");
+                dealer.printHand(true);
+                System.out.println("");
+    
+                System.out.println("\nYour final sum for hand 1 is: " + me.getHandSum());
+                System.out.println("\nYour final sum for hand 2 is: " + meSplit.getHandSum());
+                System.out.println("\nDealer's final sum is: " + dealer.getHandSum());
+                System.out.println("");
+
+            } else {
+                me.printHand(true);
+                System.out.println("");
+                dealer.printHand(true);
+                System.out.println("");
+
+                System.out.println("\nYour final sum is: " + me.getHandSum());
+                System.out.println("\nDealer's final sum is: " + dealer.getHandSum());
+                System.out.println("");
+            }
 
             double betAmount = me.getPlayersBet();
 
-            if (mySum > dealerSum && mySum <= 21 || dealerSum > 21) {
+            if (roundSplit) {
+
+                if (mySum > dealerSum && mySum <= 21 || dealerSum > 21) {
+                    System.out.println(ANSI_GREEN + "Your First Hand Wins!");
+                    me.playerWins(betAmount);
+                    System.out.println("You won $" + betAmount + ANSI_RESET);
+                    System.out.println("Your current pot is $" + me.getInitalAmount());
+                } else {
+                    System.out.println(ANSI_RED + "Dealer wins!");
+                    System.out.println("You lost $" + betAmount + ANSI_RESET);
+                    System.out.println("Your current pot is $" + me.getInitalAmount());
+                }
+
+                if (mySplitSum > dealerSum && mySplitSum <= 21 || dealerSum > 21) {
+                    System.out.println(ANSI_GREEN + "Your Second Hand Win!");
+                    me.playerWins(betAmount);
+                    System.out.println("You won $" + betAmount + ANSI_RESET);
+                    System.out.println("Your current pot is $" + me.getInitalAmount());
+                } else {
+                    System.out.println(ANSI_RED + "Dealer wins!");
+                    System.out.println("You lost $" + betAmount + ANSI_RESET);
+                    System.out.println("Your current pot is $" + me.getInitalAmount());
+                }
+
+            } else if (mySum > dealerSum && mySum <= 21 || dealerSum > 21) {
                 System.out.println(ANSI_GREEN + "You Win!");
                 me.playerWins(betAmount);
                 System.out.println("You won $" + betAmount + ANSI_RESET);
@@ -126,6 +181,7 @@ public class GameRunner {
             }
 
             me.emptyHand();
+            meSplit.emptyHand();
             dealer.emptyHand();
 
             if (me.getInitalAmount() < 5){

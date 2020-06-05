@@ -139,6 +139,10 @@ public class Player {
         return this.hand[card];
     }
 
+    public void setHandCard(int card, Card cardToChange) {
+        this.hand[card] = cardToChange;
+    }
+
     public void playerWins(double bet) {
         bet = this.playersBet;
         this.initalAmount += (bet * 2);
