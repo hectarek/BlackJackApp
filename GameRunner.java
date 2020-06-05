@@ -8,6 +8,12 @@ public class GameRunner {
     public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String RED_BOLD_BRIGHT = "\033[1;91m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
+    public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
+    public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
+    public static final String YELLOW_BOLD = "\033[1;33m";
 
 
 
@@ -17,9 +23,14 @@ public class GameRunner {
         Scanner sc = new Scanner(System.in);
         Deck theDeck = new Deck(1, true);
 
-        System.out.println("What is your name?");
+        System.out.print(ANSI_YELLOW + "Welcome " + ANSI_RESET);
+        System.out.print(ANSI_RED + "to " + ANSI_RESET);
+        System.out.print(ANSI_PURPLE + "George's " + ANSI_RESET);
+        System.out.print(ANSI_GREEN + "Casino!\n " + ANSI_RESET);
+
+        System.out.println(RED_BOLD_BRIGHT + "What is your name?" + ANSI_RESET);
         String playerName = sc.nextLine();
-        Player me = new Player(playerName);
+        Player me = new Player(ANSI_GREEN_BACKGROUND + playerName + ANSI_RESET);
         Player dealer = new Player("Dealer");
 
         boolean playGame = false;
@@ -97,18 +108,19 @@ public class GameRunner {
                 System.out.println(ANSI_GREEN + "You Win!");
                 me.playerWins(betAmount);
                 System.out.println("You won $" + betAmount + ANSI_RESET);
-                System.out.println("Your current pot is $" + me.getInitalAmount());
+                System.out.println(ANSI_GREEN + ANSI_WHITE_BACKGROUND + "[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]" + ANSI_RESET);
+                System.out.println(ANSI_BLUE_BACKGROUND + YELLOW_BOLD +  "Your current pot is $"  + me.getInitalAmount()+ ANSI_RESET);
             } else {
                 System.out.println(ANSI_RED + "Dealer wins!");
                 System.out.println("You lost $" + betAmount + ANSI_RESET);
-                System.out.println("Your current pot is $" + me.getInitalAmount());
+                System.out.println(ANSI_BLUE_BACKGROUND + YELLOW_BOLD +  "Your current pot is $"  + me.getInitalAmount() + ANSI_RESET);
             }
 
             me.emptyHand();
             dealer.emptyHand();
 
             if (me.getInitalAmount() < 5){
-                System.out.println(ANSI_RED + "\nLooks like your luck just ran out!\n" + ANSI_RESET);
+                System.out.println(ANSI_RED + "\nLooks like your luck just ran out!\n"+ANSI_WHITE_BACKGROUND +"(ノಠ益ಠ)ノ彡┻━┻" + ANSI_RESET);
                 break;
             }
 
@@ -126,3 +138,4 @@ public class GameRunner {
         System.out.println(ANSI_YELLOW + "Thank you for coming!" + ANSI_RESET);
     }
 }
+
