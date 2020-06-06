@@ -9,9 +9,6 @@ public class GameRunner {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_BLACK = "\u001B[30m";
 
-
-
-
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -34,9 +31,12 @@ public class GameRunner {
         while ( playGame && me.getInitalAmount() >= 5 ) {
             me.askPlayersBet();
 
-            me.addCard(theDeck.dealNextCard());
+            // me.addCard(theDeck.dealNextCard());
+            me.addCard(new Card(Suit.Clubs, 4));
+            me.addCard(new Card(Suit.Hearts, 4));
+
             dealer.addCard(theDeck.dealNextCard());
-            me.addCard(theDeck.dealNextCard());
+            // me.addCard(theDeck.dealNextCard());
             dealer.addCard(theDeck.dealNextCard());
 
             int playersFirstCard = me.printHand(0);
@@ -75,7 +75,11 @@ public class GameRunner {
 
             while (!meDone || !dealerDone || roundSplit) {
                 if (!meDone) {
-                    System.out.println(ANSI_CYAN + "Hit or Stay? (Enter H or S)" + ANSI_RESET);
+                    if (roundSplit) {
+                        System.out.println(ANSI_CYAN + "First Hand: Hit or Stay? (Enter H or S)" + ANSI_RESET);
+                    } else {
+                        System.out.println(ANSI_CYAN + "Hit or Stay? (Enter H or S)" + ANSI_RESET);
+                    }
                     ans = sc.next();
                     System.out.println();
 
@@ -115,6 +119,8 @@ public class GameRunner {
                 System.out.println("");
             }
 
+            roundSplit = true;
+
             int mySum = me.getHandSum();
             int mySplitSum = meSplit.getHandSum();
             int dealerSum = dealer.getHandSum();
@@ -153,7 +159,7 @@ public class GameRunner {
                     System.out.println("You won $" + betAmount + ANSI_RESET);
                     System.out.println("Your current pot is $" + me.getInitalAmount());
                 } else {
-                    System.out.println(ANSI_RED + "Dealer wins!");
+                    System.out.println(ANSI_RED + "Your first hand lost to the Dealer!");
                     System.out.println("You lost $" + betAmount + ANSI_RESET);
                     System.out.println("Your current pot is $" + me.getInitalAmount());
                 }
@@ -164,10 +170,12 @@ public class GameRunner {
                     System.out.println("You won $" + betAmount + ANSI_RESET);
                     System.out.println("Your current pot is $" + me.getInitalAmount());
                 } else {
-                    System.out.println(ANSI_RED + "Dealer wins!");
+                    System.out.println(ANSI_RED + "Your first hand lost to the Dealer!");
                     System.out.println("You lost $" + betAmount + ANSI_RESET);
                     System.out.println("Your current pot is $" + me.getInitalAmount());
                 }
+
+                roundSplit = false;
 
             } else if (mySum > dealerSum && mySum <= 21 || dealerSum > 21) {
                 System.out.println(ANSI_GREEN + "You Win!");
