@@ -6,7 +6,7 @@ public class Player {
     private String name;
 
     // The player's Inital betting amount
-    private double initalAmount = 200.00;
+    private double playersAmount = 200.00;
 
     // The player's amount they bet
     private double playersBet;
@@ -39,20 +39,20 @@ public class Player {
     }
 
     // Get players bet amount
-    public double getInitalAmount() {
-        return this.initalAmount;
+    public double getPlayersAmount() {
+        return this.playersAmount;
     }
 
     public double askPlayersBet() {
-        System.out.println("Your current amount is " + this.initalAmount);
+        System.out.println("Your current amount is " + this.playersAmount);
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter a bet amount in increments of 5. (Ex. 5, 10, 15, etc.)");
         double amount;
         do {
             amount = sc.nextDouble();
-            if (amount <= this.initalAmount) {
+            if (amount <= this.playersAmount) {
                 if (amount % 5 == 0 && amount >= 5) {
-                    this.initalAmount -= amount;
+                    this.playersAmount -= amount;
                     System.out.println("Your bet amount is " + amount);
                     break;                
                 } else {
@@ -70,6 +70,11 @@ public class Player {
 
     public double getPlayersBet() {
         return this.playersBet;
+    }
+
+    public void doublePlayersBet() {
+        this.playersAmount -= this.playersBet;
+        this.playersBet = this.playersBet *2;
     }
 
     // Add a card to the player's hand.
@@ -145,6 +150,6 @@ public class Player {
 
     public void playerWins(double bet) {
         bet = this.playersBet;
-        this.initalAmount += (bet * 2);
+        this.playersAmount += (bet * 2);
     }
 }

@@ -92,7 +92,7 @@ public class Card {
                 break;
         }
 
-        return numStr + suitStr;
+        return numStr + mySuit.toString() + suitStr;
     }
 
 }
