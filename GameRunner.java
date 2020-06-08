@@ -55,8 +55,9 @@ public class GameRunner {
             boolean dealerDone = false;
             boolean roundSplit = false;
             String ans;
-
-            if (playersFirstCard == playersSecondCard) {
+                
+            // added check to not allow play to split if player bet was more than twice what they have in hanc
+            if (playersFirstCard == playersSecondCard && me.getPlayersBet()*2 < me.getPlayersAmount()) {
 
                 System.out.println(ANSI_CYAN + "Would you like to split your cards? (y/n)" + ANSI_RESET);
                 String wantToSplit = sc.next();
@@ -78,7 +79,6 @@ public class GameRunner {
                     System.out.println("Bet has been doubled!");
                     System.out.println("Amount wagered: " + me.getPlayersBet());
                     System.out.println("Current amount: " + me.getPlayersAmount());
-                    // add check to see if they have enough money 
                 }
 
             }
@@ -131,7 +131,6 @@ public class GameRunner {
                 }
                 
             }
-
 
             int mySum = me.getHandSum();
             int mySplitSum = meSplit.getHandSum();
