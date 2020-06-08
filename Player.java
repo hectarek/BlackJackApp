@@ -149,7 +149,6 @@ public class Player {
     }
 
     public void playerWins(double bet) {
-        bet = this.playersBet;
-        this.playersAmount += (bet * 2);
+        this.playersAmount += bet;
     }
 }
