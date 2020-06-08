@@ -27,7 +27,7 @@ public class GameRunner {
 
         System.out.println(RED_BOLD_BRIGHT + "What is your name?" + ANSI_RESET);
         String playerName = sc.nextLine();
-        Player me = new Player(ANSI_GREEN_BACKGROUND + playerName + ANSI_RESET);
+        Player me = new Player(playerName);
         Player dealer = new Player("Dealer");
         Player meSplit = new Player(me.getName()+ "'s Split");
 
