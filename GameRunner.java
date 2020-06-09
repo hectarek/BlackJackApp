@@ -20,7 +20,7 @@ public class GameRunner {
 
     public static void main(String[] args) {
 
-        String filepath = "CasinoJazz.mp3";
+        String filepath = "CasinoJazz.wav";
         PlayMusic music = new PlayMusic();
         music.playMusic(filepath);
 
@@ -244,6 +244,7 @@ public class GameRunner {
 
         }
         System.out.println(ANSI_YELLOW + "Thank you for coming!" + ANSI_RESET);
+        sc.close();
     }
 }
 
