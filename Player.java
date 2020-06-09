@@ -131,7 +131,7 @@ public class Player {
     // take param of showFirstCard which says if we want to print the card of the
     // first hand; useful when we may not want to see the cards of the dealer
     public void printHand(boolean showFirstCard) {
-        System.out.println(ANSI_YELLOW + this.name + ANSI_RESET + "s's cards: \n");
+        System.out.println(ANSI_YELLOW + this.name + "'s" + ANSI_RESET + " cards: \n");
         for (int c = 0; c < this.numCards; c++) {
             if (c == 0 && !showFirstCard) {// if we are on the first card and don't want to print it
                 System.out.println( ANSI_YELLOW + " [hidden]" + ANSI_RESET);
