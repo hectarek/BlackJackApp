@@ -299,8 +299,8 @@ public class GameRunner {
             }
 
             if (askAgain.equalsIgnoreCase("y")) {
-                System.out.println("--------------");
-                System.out.println(":Next Round:");
+                System.out.println(ANSI_BRIGHT_YELLOW + "--------------" + ANSI_RESET);
+                System.out.println( "*** Next Round ***\n" + ANSI_RESET);
             } else {
                 playGame = false;
             }
