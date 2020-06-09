@@ -8,14 +8,21 @@ public class GameRunner {
     public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_BRIGHT_BLUE   = "\u001B[94m";
     public static final String RED_BOLD_BRIGHT = "\033[1;91m";
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
     public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
     public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
     public static final String YELLOW_BOLD = "\033[1;33m";
+    public static final String ANSI_BRIGHT_YELLOW = "\u001B[93m";
+    public static final String ANSI_BRIGHT_BG_YELLOW = "\u001B[103m";
 
     public static void main(String[] args) {
+
+        String filepath = "CasinoJazz.mp3";
+        PlayMusic music = new PlayMusic();
+        music.playMusic(filepath);
 
         Scanner sc = new Scanner(System.in);
         Deck theDeck = new Deck(1, true);
@@ -91,7 +98,7 @@ public class GameRunner {
 
             }
 
-            while (!meDone && !dealerDone && !meSplitDone) {
+            while ( ( !meDone || !dealerDone ) && !meSplitDone) {
                 if (!meDone) {
                     if (roundSplit) {
                         System.out.println(ANSI_CYAN + "First Hand: Hit or Stay? (Enter H or S)" + ANSI_RESET);
@@ -175,7 +182,10 @@ public class GameRunner {
                 // Halfing the bet amount to equal one of the two hands (was doubled above)
                 double bets = betAmount/2;
 
-                if (mySum > dealerSum && mySum <= 21 || dealerSum > 21) {
+                if (mySum == dealerSum && mySum <= 21) {
+                    System.out.println( ANSI_BRIGHT_BLUE + "It was a tie! Bet is returned to player." + ANSI_RESET);
+                    me.playerWins(betAmount);
+                } else if (mySum > dealerSum && mySum <= 21) {
                     System.out.println(ANSI_GREEN + "Your First Hand Wins!");
                     me.playerWins(bets);
                     System.out.println("You won $" + bets + ANSI_RESET);
@@ -186,7 +196,7 @@ public class GameRunner {
                     System.out.println("Your current pot is $" + me.getPlayersAmount());
                 }
 
-                if (mySplitSum > dealerSum && mySplitSum <= 21 || dealerSum > 21) {
+                if (mySplitSum > dealerSum && mySplitSum <= 21) {
                     System.out.println(ANSI_GREEN + "Your Second Hand Win!");
                     me.playerWins(bets);
                     System.out.println("You won $" + bets + ANSI_RESET);
@@ -198,12 +208,14 @@ public class GameRunner {
                 }
 
                 roundSplit = false;
-
-            } else if (mySum > dealerSum && mySum <= 21 || dealerSum > 21) {
-                System.out.println(ANSI_GREEN + "You Win!");
+            } else if (mySum == dealerSum && mySum <= 21) {
+                System.out.println( ANSI_BRIGHT_BLUE + "It was a tie! Bet is returned to player." + ANSI_RESET);
                 me.playerWins(betAmount);
+            } else if (mySum > dealerSum && mySum <= 21) {
+                System.out.println(ANSI_GREEN + "You Win!");
+                me.playerWins((betAmount*2));
                 System.out.println("You won $" + betAmount + ANSI_RESET);
-                System.out.println(ANSI_GREEN + ANSI_WHITE_BACKGROUND + "[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]" + ANSI_RESET);
+                System.out.println(ANSI_BRIGHT_BLUE + ANSI_BRIGHT_BG_YELLOW + "[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]" + ANSI_RESET);
                 System.out.println(ANSI_BLUE_BACKGROUND + YELLOW_BOLD +  "Your current pot is $"  + me.getPlayersAmount()+ ANSI_RESET);
             } else {
                 System.out.println(ANSI_RED + "Dealer wins!");
