@@ -110,7 +110,7 @@ public class GameRunner {
 
                 while(true) {
                     wantToSplit = sc.next().trim();
-                    if(answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("n")){
+                    if(wantToSplit.equalsIgnoreCase("y") || wantToSplit.equalsIgnoreCase("n")){
                         break;
                     } else {
                         System.out.println("Sorry, please enter 'y' or 'n'.");
@@ -240,7 +240,7 @@ public class GameRunner {
                 if (mySum == dealerSum && mySum <= 21) {
                     System.out.println( ANSI_BRIGHT_BLUE + "It was a tie! Bet is returned to player." + ANSI_RESET);
                     me.playerWins(betAmount);
-                } else if (mySum > dealerSum && mySum <= 21) {
+                } else if ( (mySum > dealerSum && mySum <= 21) || (dealerSum > 21 && mySum < 21)) {
                     System.out.println(ANSI_GREEN + "Your First Hand Wins!");
                     me.playerWins(bets);
                     System.out.println("You won $" + bets + ANSI_RESET);
@@ -251,7 +251,7 @@ public class GameRunner {
                     System.out.println("Your current pot is $" + me.getPlayersAmount());
                 }
 
-                if (mySplitSum > dealerSum && mySplitSum <= 21) {
+                if ( (mySplitSum > dealerSum && mySplitSum <= 21)|| (dealerSum > 21 && mySum < 21))  {
                     System.out.println(ANSI_GREEN + "Your Second Hand Win!");
                     me.playerWins(bets);
                     System.out.println("You won $" + bets + ANSI_RESET);
@@ -266,7 +266,7 @@ public class GameRunner {
             } else if (mySum == dealerSum && mySum <= 21) {
                 System.out.println( ANSI_BRIGHT_BLUE + "It was a tie! Bet is returned to player." + ANSI_RESET);
                 me.playerWins(betAmount);
-            } else if (mySum > dealerSum && mySum <= 21) {
+            } else if ( (mySum > dealerSum && mySum <= 21) || (dealerSum > 21 && mySum < 21) ) {
                 System.out.println(ANSI_GREEN + "You Win!");
                 me.playerWins((betAmount*2));
                 System.out.println("You won $" + betAmount + ANSI_RESET);
@@ -299,14 +299,14 @@ public class GameRunner {
             }
 
             if (askAgain.equalsIgnoreCase("y")) {
-                System.out.println(ANSI_BRIGHT_YELLOW + "--------------" + ANSI_RESET);
+                System.out.println(ANSI_BRIGHT_YELLOW + "------------------" + ANSI_RESET);
                 System.out.println( "*** Next Round ***\n" + ANSI_RESET);
             } else {
                 playGame = false;
             }
 
         }
-        System.out.println(ANSI_YELLOW + "Thank you for coming!" + ANSI_RESET);
+        System.out.println(ANSI_YELLOW + "\nThank you for coming!\n" + ANSI_RESET);
         sc.close();
     }
 }
