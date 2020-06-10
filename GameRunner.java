@@ -106,7 +106,7 @@ public class GameRunner {
             if (playersFirstCard == playersSecondCard && me.getPlayersBet()*2 < me.getPlayersAmount()) {
 
                 System.out.println(ANSI_CYAN + "Would you like to split your cards? (y/n)" + ANSI_RESET);
-                String wantToSplit = sc.next();
+                String wantToSplit;
 
                 while(true) {
                     wantToSplit = sc.next().trim();
