@@ -81,9 +81,11 @@ public class GameRunner {
             
             me.askPlayersBet();
 
-            me.addCard(theDeck.dealNextCard());
+            me.addCard( new Card(Suit.Clubs, 8));
+            // me.addCard(theDeck.dealNextCard());
             dealer.addCard(theDeck.dealNextCard());
-            me.addCard(theDeck.dealNextCard());
+            me.addCard( new Card(Suit.Hearts, 8));
+            // me.addCard(theDeck.dealNextCard());
             dealer.addCard(theDeck.dealNextCard());
 
             int playersFirstCard = me.printHand(0);
