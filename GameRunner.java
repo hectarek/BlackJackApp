@@ -2,38 +2,76 @@ import java.util.Scanner;
 
 public class GameRunner {
 
-    public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String RED_BOLD_BRIGHT = "\033[1;91m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
-    public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
-    public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
-    public static final String YELLOW_BOLD = "\033[1;33m";
 
+    public static final String ANSI_BLACK  = "\u001B[30m";
+    public static final String ANSI_RED    = "\u001B[31m";
+    public static final String ANSI_GREEN  = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE   = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN   = "\u001B[36m";
+    public static final String ANSI_WHITE  = "\u001B[37m";
+  
+    public static final String ANSI_BRIGHT_BLACK  = "\u001B[90m";
+    public static final String ANSI_BRIGHT_RED    = "\u001B[91m";
+    public static final String ANSI_BRIGHT_GREEN  = "\u001B[92m";
+    public static final String ANSI_BRIGHT_YELLOW = "\u001B[93m";
+    public static final String ANSI_BRIGHT_BLUE   = "\u001B[94m";
+    public static final String ANSI_BRIGHT_PURPLE = "\u001B[95m";
+    public static final String ANSI_BRIGHT_CYAN   = "\u001B[96m";
+    public static final String ANSI_BRIGHT_WHITE  = "\u001B[97m";
+
+    public static final String ANSI_BG_BLACK  = "\u001B[40m";
+    public static final String ANSI_BG_RED    = "\u001B[41m";
+    public static final String ANSI_BG_GREEN  = "\u001B[42m";
+    public static final String ANSI_BG_YELLOW = "\u001B[43m";
+    public static final String ANSI_BG_BLUE   = "\u001B[44m";
+    public static final String ANSI_BG_PURPLE = "\u001B[45m";
+    public static final String ANSI_BG_CYAN   = "\u001B[46m";
+    public static final String ANSI_BG_WHITE  = "\u001B[47m";
+
+    public static final String ANSI_BRIGHT_BG_BLACK  = "\u001B[100m";
+    public static final String ANSI_BRIGHT_BG_RED    = "\u001B[101m";
+    public static final String ANSI_BRIGHT_BG_GREEN  = "\u001B[102m";
+    public static final String ANSI_BRIGHT_BG_YELLOW = "\u001B[103m";
+    public static final String ANSI_BRIGHT_BG_BLUE   = "\u001B[104m";
+    public static final String ANSI_BRIGHT_BG_PURPLE = "\u001B[105m";
+    public static final String ANSI_BRIGHT_BG_CYAN   = "\u001B[106m";
+    public static final String ANSI_BRIGHT_BG_WHITE  = "\u001B[107m";
     public static void main(String[] args) {
+
+        String filepath = "CasinoJazz.wav";
+        PlayMusic music = new PlayMusic();
+        music.playMusic(filepath);
 
         Scanner sc = new Scanner(System.in);
         Deck theDeck = new Deck(1, true);
 
-        System.out.print(ANSI_YELLOW + "Welcome " + ANSI_RESET);
-        System.out.print(ANSI_RED + "to " + ANSI_RESET);
-        System.out.print(ANSI_PURPLE + "George's " + ANSI_RESET);
-        System.out.print(ANSI_GREEN + "Casino!\n " + ANSI_RESET);
+        System.out.print(ANSI_BRIGHT_YELLOW + "Welcome " + ANSI_RESET);
+        System.out.print(ANSI_BRIGHT_BLUE + "to " + ANSI_RESET);
+        System.out.print(ANSI_BRIGHT_PURPLE + "George's " + ANSI_RESET);
+        System.out.print(ANSI_BRIGHT_GREEN + "Casino!\n " + ANSI_RESET);
 
-        System.out.println(RED_BOLD_BRIGHT + "What is your name?" + ANSI_RESET);
+        System.out.println(ANSI_BRIGHT_CYAN + "What is your name?" + ANSI_RESET);
         String playerName = sc.nextLine();
-        Player me = new Player(ANSI_GREEN_BACKGROUND + playerName + ANSI_RESET);
+        Player me = new Player(playerName);
         Player dealer = new Player("Dealer");
         Player meSplit = new Player(me.getName()+ "'s Split");
 
         boolean playGame = false;
         System.out.println(ANSI_YELLOW + "Do you want to play a game of BlackJack? (y/n)" + ANSI_RESET);
-        String answer = sc.nextLine();
+        
+        String answer;
+
+        while(true) {
+            answer = sc.nextLine().trim();
+            if(answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("n")){
+                break;
+            } else {
+                System.out.println("Sorry, please enter 'y' or 'n'.");
+            }
+        }
 
         if (answer.equalsIgnoreCase("y")) {
             playGame = true;
@@ -68,7 +106,16 @@ public class GameRunner {
             if (playersFirstCard == playersSecondCard && me.getPlayersBet()*2 < me.getPlayersAmount()) {
 
                 System.out.println(ANSI_CYAN + "Would you like to split your cards? (y/n)" + ANSI_RESET);
-                String wantToSplit = sc.next();
+                String wantToSplit;
+
+                while(true) {
+                    wantToSplit = sc.next().trim();
+                    if(wantToSplit.equalsIgnoreCase("y") || wantToSplit.equalsIgnoreCase("n")){
+                        break;
+                    } else {
+                        System.out.println("Sorry, please enter 'y' or 'n'.");
+                    }
+                }
 
                 if(wantToSplit.equalsIgnoreCase("y")) {
                     roundSplit = true;
@@ -91,14 +138,22 @@ public class GameRunner {
 
             }
 
-            while (!meDone && !dealerDone && !meSplitDone) {
+            while ( ( !meDone || !dealerDone ) && !meSplitDone) {
                 if (!meDone) {
                     if (roundSplit) {
                         System.out.println(ANSI_CYAN + "First Hand: Hit or Stay? (Enter H or S)" + ANSI_RESET);
                     } else {
                         System.out.println(ANSI_CYAN + "Hit or Stay? (Enter H or S)" + ANSI_RESET);
                     }
-                    ans = sc.next();
+
+                    while(true) {
+                        ans = sc.next().trim();
+                        if(ans.equalsIgnoreCase("h") || ans.equalsIgnoreCase("s")){
+                            break;
+                        } else {
+                            System.out.println("Sorry, please enter 'h' or 's'.");
+                        }
+                    }
                     System.out.println();
 
                     if (ans.compareToIgnoreCase("H") == 0) {
@@ -113,7 +168,14 @@ public class GameRunner {
                 }
                 if (roundSplit) {
                     System.out.println(ANSI_CYAN + "Second Hand: Hit or Stay? (Enter H or S)" + ANSI_RESET);
-                    ans = sc.next();
+                    while(true) {
+                        ans = sc.next().trim();
+                        if(ans.equalsIgnoreCase("h") || ans.equalsIgnoreCase("s")){
+                            break;
+                        } else {
+                            System.out.println("Sorry, please enter 'h' or 's'.");
+                        }
+                    }                    
                     System.out.println();
 
                     if (ans.compareToIgnoreCase("H") == 0) {
@@ -175,7 +237,10 @@ public class GameRunner {
                 // Halfing the bet amount to equal one of the two hands (was doubled above)
                 double bets = betAmount/2;
 
-                if (mySum > dealerSum && mySum <= 21 || dealerSum > 21) {
+                if (mySum == dealerSum && mySum <= 21) {
+                    System.out.println( ANSI_BRIGHT_BLUE + "It was a tie! Bet is returned to player." + ANSI_RESET);
+                    me.playerWins(betAmount);
+                } else if ( (mySum > dealerSum && mySum <= 21) || (dealerSum > 21 && mySum < 21)) {
                     System.out.println(ANSI_GREEN + "Your First Hand Wins!");
                     me.playerWins(bets);
                     System.out.println("You won $" + bets + ANSI_RESET);
@@ -186,7 +251,7 @@ public class GameRunner {
                     System.out.println("Your current pot is $" + me.getPlayersAmount());
                 }
 
-                if (mySplitSum > dealerSum && mySplitSum <= 21 || dealerSum > 21) {
+                if ( (mySplitSum > dealerSum && mySplitSum <= 21)|| (dealerSum > 21 && mySum < 21))  {
                     System.out.println(ANSI_GREEN + "Your Second Hand Win!");
                     me.playerWins(bets);
                     System.out.println("You won $" + bets + ANSI_RESET);
@@ -198,17 +263,19 @@ public class GameRunner {
                 }
 
                 roundSplit = false;
-
-            } else if (mySum > dealerSum && mySum <= 21 || dealerSum > 21) {
-                System.out.println(ANSI_GREEN + "You Win!");
+            } else if (mySum == dealerSum && mySum <= 21) {
+                System.out.println( ANSI_BRIGHT_BLUE + "It was a tie! Bet is returned to player." + ANSI_RESET);
                 me.playerWins(betAmount);
+            } else if ( (mySum > dealerSum && mySum <= 21) || (dealerSum > 21 && mySum < 21) ) {
+                System.out.println(ANSI_GREEN + "You Win!");
+                me.playerWins((betAmount*2));
                 System.out.println("You won $" + betAmount + ANSI_RESET);
-                System.out.println(ANSI_GREEN + ANSI_WHITE_BACKGROUND + "[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]" + ANSI_RESET);
-                System.out.println(ANSI_BLUE_BACKGROUND + YELLOW_BOLD +  "Your current pot is $"  + me.getPlayersAmount()+ ANSI_RESET);
+                System.out.println(ANSI_BRIGHT_BLUE + ANSI_BRIGHT_BG_YELLOW + "[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]" + ANSI_RESET);
+                System.out.println(ANSI_BRIGHT_BG_BLUE + ANSI_BRIGHT_YELLOW +  "Your current pot is $"  + me.getPlayersAmount()+ ANSI_RESET);
             } else {
                 System.out.println(ANSI_RED + "Dealer wins!");
                 System.out.println("You lost $" + betAmount + ANSI_RESET);
-                System.out.println(ANSI_BLUE_BACKGROUND + YELLOW_BOLD +  "Your current pot is $"  + me.getPlayersAmount() + ANSI_RESET);
+                System.out.println(ANSI_BRIGHT_BG_BLUE + ANSI_BRIGHT_YELLOW +  "Your current pot is $"  + me.getPlayersAmount() + ANSI_RESET);
             }
 
             me.emptyHand();
@@ -216,22 +283,31 @@ public class GameRunner {
             dealer.emptyHand();
 
             if (me.getPlayersAmount() < 5){
-                System.out.println(ANSI_RED + "\nLooks like your luck just ran out!\n"+ANSI_WHITE_BACKGROUND +"(ノಠ益ಠ)ノ彡┻━┻" + ANSI_RESET);
+                System.out.println(ANSI_RED + "\nLooks like your luck just ran out!\n"+ ANSI_BRIGHT_BG_WHITE +"(ノಠ益ಠ)ノ彡┻━┻" + ANSI_RESET);
                 break;
             }
 
             System.out.println(ANSI_CYAN + "\nDo you want to play again? (y/n)" + ANSI_RESET);
-            String askAgain = sc.next();
+            String askAgain;
+            while(true) {
+                askAgain = sc.next().trim();
+                if(askAgain.equalsIgnoreCase("y") || askAgain.equalsIgnoreCase("n")){
+                    break;
+                } else {
+                    System.out.println("Sorry, please enter 'y' or 'n'.");
+                }
+            }
 
             if (askAgain.equalsIgnoreCase("y")) {
-                System.out.println("--------------");
-                System.out.println(":Next Round:");
+                System.out.println(ANSI_BRIGHT_YELLOW + "------------------" + ANSI_RESET);
+                System.out.println( "*** Next Round ***\n" + ANSI_RESET);
             } else {
                 playGame = false;
             }
 
         }
-        System.out.println(ANSI_YELLOW + "Thank you for coming!" + ANSI_RESET);
+        System.out.println(ANSI_YELLOW + "\nThank you for coming!\n" + ANSI_RESET);
+        sc.close();
     }
 }
 

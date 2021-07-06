@@ -1,7 +1,12 @@
 import java.util.Scanner;
 
+
 //implementation of blackjack player
 public class Player {
+
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_RESET = "\u001B[0m";
+
     // the player's name
     private String name;
 
@@ -44,7 +49,7 @@ public class Player {
     }
 
     public double askPlayersBet() {
-        System.out.println("Your current amount is " + this.playersAmount);
+        System.out.println("Your current amount is " + ANSI_YELLOW + this.playersAmount + ANSI_RESET);
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter a bet amount in increments of 5. (Ex. 5, 10, 15, etc.)");
         double amount;
@@ -53,7 +58,7 @@ public class Player {
             if (amount <= this.playersAmount) {
                 if (amount % 5 == 0 && amount >= 5) {
                     this.playersAmount -= amount;
-                    System.out.println("Your bet amount is " + amount);
+                    System.out.println("Your bet amount is " + ANSI_YELLOW + amount + ANSI_RESET);
                     break;                
                 } else {
                     System.out.println("Error, please enter an increment of 5");
@@ -126,10 +131,10 @@ public class Player {
     // take param of showFirstCard which says if we want to print the card of the
     // first hand; useful when we may not want to see the cards of the dealer
     public void printHand(boolean showFirstCard) {
-        System.out.printf("%s's cards: \n", this.name);
+        System.out.println(ANSI_YELLOW + this.name + "'s" + ANSI_RESET + " cards: \n");
         for (int c = 0; c < this.numCards; c++) {
             if (c == 0 && !showFirstCard) {// if we are on the first card and don't want to print it
-                System.out.println(" [hidden]");
+                System.out.println( ANSI_YELLOW + " [hidden]" + ANSI_RESET);
             } else {
                 System.out.printf(" %s\n", this.hand[c].toString());
             }
